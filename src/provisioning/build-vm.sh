@@ -107,9 +107,31 @@ fi
 
 echo ""
 
-# Step 1: Create static IP
+# Step 1: Ensure IAP Firewall Rule Exists
 echo "=================================================="
-echo "Step 1: Creating Static IP"
+echo "Step 1: Verifying IAP Firewall Rule"
+echo "=================================================="
+echo "Ensuring IAP firewall rule exists for SSH access..."
+
+gcloud compute firewall-rules create allow-ssh-from-iap \
+    --project=$PROJECT \
+    --network=default \
+    --direction=INGRESS \
+    --priority=1000 \
+    --action=ALLOW \
+    --rules=tcp:22 \
+    --source-ranges=35.235.240.0/20 \
+    --target-tags=dev-vm \
+    --description="Allow SSH via IAP for Identity-Aware Proxy" \
+    --quiet 2>/dev/null || echo "✅ IAP firewall rule already exists"
+
+echo "✅ IAP firewall rule verified"
+finish_step "IAP Firewall"
+echo ""
+
+# Step 2: Create static IP
+echo "=================================================="
+echo "Step 2: Creating Static IP"
 echo "=================================================="
 echo "Creating: $STATIC_IP_NAME in $REGION..."
 
@@ -127,9 +149,9 @@ echo "✅ Static IP: $STATIC_IP"
 finish_step "Static IP"
 echo ""
 
-# Step 2: Create VM
+# Step 3: Create VM
 echo "=================================================="
-echo "Step 2: Creating VM"
+echo "Step 3: Creating VM"
 echo "=================================================="
 echo "Creating $VM_NAME..."
 
@@ -154,9 +176,9 @@ sleep 30
 finish_step "VM Creation"
 echo ""
 
-# Step 3: Grant IAM Permissions
+# Step 4: Grant IAM Permissions
 echo "=================================================="
-echo "Step 3: Granting IAM Permissions"
+echo "Step 4: Granting IAM Permissions"
 echo "=================================================="
 
 # Permission 1: Custom Engineer Role (Start/Stop/Reset/Get/List)
@@ -215,9 +237,9 @@ echo "✅ All 5 IAM permissions granted"
 finish_step "IAM Config"
 echo ""
 
-# Step 4: Install Chrome Remote Desktop
+# Step 5: Install Chrome Remote Desktop
 echo "=================================================="
-echo "Step 4: Installing Chrome Remote Desktop"
+echo "Step 5: Installing Chrome Remote Desktop"
 echo "=================================================="
 
 gcloud compute ssh $VM_NAME --project=$PROJECT --zone=$ZONE --command="
@@ -282,9 +304,9 @@ echo "✅ CRD installed - engineer will self-setup"
 finish_step "CRD Setup"
 echo ""
 
-# Step 5: Install User Applications (Chrome, Windsurf, Jupyter)
+# Step 6: Install User Applications (Chrome, Windsurf, Jupyter)
 echo "=================================================="
-echo "Step 5: Installing Applications"
+echo "Step 6: Installing Applications"
 echo "=================================================="
 
 # Parse application config (simple grep)
@@ -337,9 +359,9 @@ gcloud compute ssh $VM_NAME --project=$PROJECT --zone=$ZONE --command="
 finish_step "App Install"
 echo ""
 
-# Step 6: Verify NO sudo access
+# Step 7: Verify NO sudo access
 echo "=================================================="
-echo "Step 6: Verifying NO Sudo Access"
+echo "Step 7: Verifying NO Sudo Access"
 echo "=================================================="
 
 gcloud compute ssh $VM_NAME --project=$PROJECT --zone=$ZONE --command="
@@ -363,9 +385,9 @@ echo '✅ Engineer will have NO sudo access'
 finish_step "Sudo Removal"
 echo ""
 
-# Step 7: Run security verification
+# Step 8: Run security verification
 echo "=================================================="
-echo "Step 7: Security Verification"
+echo "Step 8: Security Verification"
 echo "=================================================="
 echo "NOTE: Verification is permission-based and does NOT require"
 echo "      the engineer's OS Login user to exist yet."
@@ -376,9 +398,9 @@ finish_step "Security Audit"
 
 echo ""
 
-# Step 8: Install Productivity Monitoring (Activity, Git Stats, Backups)
+# Step 9: Install Productivity Monitoring (Activity, Git Stats, Backups)
 echo "=================================================="
-echo "Step 8: Installing Productivity Monitoring"
+echo "Step 9: Installing Productivity Monitoring"
 echo "=================================================="
 # This script runs locally and uses gcloud to deploy to the VM
 ./vm-scripts/install_monitoring.sh "$CONFIG_FILE"

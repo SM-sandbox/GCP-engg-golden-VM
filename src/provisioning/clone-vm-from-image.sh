@@ -52,9 +52,32 @@ fi
 echo "✅ Found image: $LATEST_IMAGE"
 echo ""
 
-# Step 2: Create VM from image
+# Step 2: Create static IP
 echo "=================================================="
-echo "Step 2: Creating VM from Image"
+echo "Step 2: Creating Static IP"
+echo "=================================================="
+
+STATIC_IP_NAME="${NEW_VM_NAME}-ip"
+REGION=$(echo $ZONE | sed 's/-[a-z]$//')
+
+echo "Creating: $STATIC_IP_NAME in $REGION..."
+
+gcloud compute addresses create $STATIC_IP_NAME \
+    --project=$PROJECT \
+    --region=$REGION \
+    --quiet || echo "⚠️  Static IP may already exist"
+
+STATIC_IP=$(gcloud compute addresses describe $STATIC_IP_NAME \
+    --project=$PROJECT \
+    --region=$REGION \
+    --format="get(address)")
+
+echo "✅ Static IP: $STATIC_IP"
+echo ""
+
+# Step 3: Create VM from image
+echo "=================================================="
+echo "Step 3: Creating VM from Image"
 echo "=================================================="
 
 echo "Creating $NEW_VM_NAME from $LATEST_IMAGE..."
@@ -66,17 +89,18 @@ gcloud compute instances create $NEW_VM_NAME \
     --image=$LATEST_IMAGE \
     --boot-disk-size=100GB \
     --boot-disk-type=pd-standard \
+    --address=$STATIC_IP \
     --metadata=enable-oslogin=TRUE \
     --scopes=https://www.googleapis.com/auth/cloud-platform \
-    --tags=http-server,https-server \
+    --tags=dev-vm \
     --quiet
 
 echo "✅ VM created"
 echo ""
 
-# Step 3: Wait for VM to boot
+# Step 4: Wait for VM to boot
 echo "=================================================="
-echo "Step 3: Waiting for VM to Boot"
+echo "Step 4: Waiting for VM to Boot"
 echo "=================================================="
 
 echo "Waiting 30 seconds for boot..."
@@ -85,9 +109,9 @@ sleep 30
 echo "✅ VM should be ready"
 echo ""
 
-# Step 4: Verify security
+# Step 5: Security Verification
 echo "=================================================="
-echo "Step 4: Security Verification"
+echo "Step 5: Security Verification"
 echo "=================================================="
 
 USERNAME="${ENGINEER_NAME}_brightfox_ai"
@@ -105,9 +129,9 @@ fi
 
 echo ""
 
-# Step 5: Get static IP
+# Step 6: VM Details
 echo "=================================================="
-echo "Step 5: VM Details"
+echo "Step 6: VM Details"
 echo "=================================================="
 
 EXTERNAL_IP=$(gcloud compute instances describe $NEW_VM_NAME \
@@ -127,6 +151,7 @@ echo "=================================================="
 echo ""
 echo "Summary:"
 echo "  ✅ VM created from image: $LATEST_IMAGE"
+echo "  ✅ Static IP assigned: $STATIC_IP"
 echo "  ✅ Security verified (no sudo)"
 echo "  ✅ VM online at: $EXTERNAL_IP"
 echo ""
