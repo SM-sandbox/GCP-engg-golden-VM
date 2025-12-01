@@ -167,6 +167,7 @@ Engineers get controlled permissions via Google Cloud IAM:
 
 ### For Engineers
 - ✅ **Full desktop environment** - Chrome Remote Desktop (GNOME)
+- ✅ **NoMachine support** - Low-latency alternative to CRD with full keyboard shortcuts
 - ✅ **No sudo needed** - AppImage installs work great
 - ✅ **Remote development** - Windsurf/VS Code compatible
 - ✅ **Pre-installed tools** - Chrome, Python, Node.js, Git, Azure CLI

@@ -1,0 +1,123 @@
+Subject: NoMachine Remote Desktop Now Available on Your VM
+
+Hi Akash and Ankush,
+
+Good news! We've set up NoMachine on your VMs to give you a better remote desktop experience with lower latency and full keyboard shortcut support.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 WHAT WE'VE DONE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Installed NoMachine Server on your VMs
+✅ Opened firewall ports (4000, 4011-4020)
+✅ Configured everything for immediate use
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎮 YOUR CONNECTION DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**AKASH:**
+  • VM Name: dev-akash-gnome-vm-001
+  • IP Address: 35.185.108.80
+  • Port: 4000
+  • Connection: 35.185.108.80:4000
+
+**ANKUSH:**
+  • VM Name: dev-ankush-gnome-vm-001
+  • IP Address: 35.196.47.155
+  • Port: 4000
+  • Connection: 35.196.47.155:4000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚙️  SETUP INSTRUCTIONS (3 MINUTES)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**Step 1: Download NoMachine Client**
+
+Go to: https://www.nomachine.com/download
+
+Download the client for your operating system:
+  • macOS: Download "NoMachine for macOS"
+  • Windows: Download "NoMachine for Windows"
+  • Linux: Download "NoMachine for Linux"
+
+**Step 2: Install NoMachine Client**
+
+  • Open the downloaded file
+  • Follow the installation wizard
+  • No special configuration needed
+
+**Step 3: Connect to Your VM**
+
+1. Open NoMachine application on your computer
+
+2. Click "New connection"
+
+3. Enter these details:
+   • Protocol: NX
+   • Host: YOUR_IP_ADDRESS (see above)
+   • Port: 4000
+   • Name: "My Dev VM" (or whatever you prefer)
+
+4. Click "Connect"
+
+5. Login with your VM credentials:
+   • Username: Your VM username (akash_brightfox_ai or ankush_brightfox_ai)
+   • Password: (Use the password you normally use for SSH/VM access)
+
+6. Select your desktop session (GNOME or Xfce)
+
+7. You're in! 🎉
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 NOMACHINE vs CHROME REMOTE DESKTOP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**NoMachine Advantages:**
+  ✅ Much faster - native app, less lag
+  ✅ All keyboard shortcuts work (Ctrl+C, Ctrl+V, etc.)
+  ✅ Better performance for coding
+  ✅ Multi-monitor support
+  ✅ File transfer between local and VM
+
+**Chrome Remote Desktop:**
+  • Still works! You can use both
+  • Good for quick access from any browser
+  • Use NoMachine for heavy development work
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❓ TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**Connection timeout?**
+  → Make sure your VM is running (not stopped)
+  → Check you're using the correct IP address
+  → Verify you're using port 4000
+
+**Can't login?**
+  → Use your VM username (not email)
+  → Use your SSH password
+
+**Slow connection?**
+  → Check your local internet speed
+  → Try changing NoMachine quality settings (lower = faster)
+
+**Still having issues?**
+  → Email: scott@brightfox.ai
+  → Include: Screenshot of error, VM name, what you tried
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 NOTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Your VMs are currently RUNNING
+• Remember to stop them when not in use to save costs
+• NoMachine works alongside Chrome Remote Desktop
+• Both use the same VM desktop - just different access methods
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Let me know how it works for you!
+
+Best regards,
+Scott

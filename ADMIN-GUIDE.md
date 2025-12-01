@@ -20,7 +20,7 @@ Edit the file with engineer's details:
 ### Step 2: Run Build Script
 
 ```bash
-./scripts/build-vm.sh config/users/<name>.yaml
+./src/provisioning/build-vm.sh config/users/<name>.yaml
 ```
 
 **Duration:** ~40-45 minutes
@@ -36,7 +36,7 @@ Edit the file with engineer's details:
 ### Step 3: Verify Security
 
 ```bash
-./scripts/verify-security.sh <name> <vm-name> gcp-engg-vm us-east1-b
+./src/security/verify-security.sh <name> <vm-name> gcp-engg-vm us-east1-b
 ```
 
 **Must pass all 13 tests!**
@@ -116,7 +116,7 @@ billing:
 
 ---
 
-### Security Verification (6 Tests):
+### Security Verification:
 
 1. ✅ **IAM Roles** - No instanceAdmin.v1 (CRITICAL)
 2. ✅ Project metadata set correctly
@@ -130,25 +130,27 @@ billing:
 ## 📁 Directory Structure
 
 ```
-GCP-Engg_VM/
+GCP-engg-golden-VM/
 ├── ADMIN-GUIDE.md              # ← You are here
 ├── README.md                   # Project overview
+├── CHANGELOG.md                # Version history
 ├── config/
-│   └── users/
-│       ├── template.yaml       # Template for new VMs
-│       ├── akash.yaml
-│       └── ankush.yaml
-├── scripts/
-│   ├── build-vm.sh             # Main build script
-│   ├── verify-security.sh      # Security audit
-│   ├── monitor-sudo-removal.sh # Monitoring service
-│   └── sudo-monitor.service    # Systemd service
-├── onboarding-emails/
-│   ├── README.md               # How to use
-│   ├── TEMPLATE-onboarding-email.txt
-│   └── dev-*-COMPLETE-ONBOARDING.txt
-├── docs/                       # Reference documentation
-└── archive/                    # Historical files
+│   └── users/                  # Per-user VM configurations
+│       ├── template.yaml
+│       └── *.yaml
+├── src/
+│   ├── provisioning/           # VM creation & setup
+│   │   ├── build-vm.sh
+│   │   ├── setup-crd.sh
+│   │   ├── install-nomachine.sh
+│   │   └── setup-nomachine-firewall.sh
+│   ├── security/               # Security verification
+│   │   └── verify-security.sh
+│   ├── monitoring/             # Activity tracking
+│   ├── golden-image/           # Golden image creation
+│   └── onboarding/             # Email templates
+├── docs/operations/            # Operational guides
+└── artifacts/                  # Generated files (gitignored)
 ```
 
 ---
@@ -196,7 +198,7 @@ sudo journalctl -u sudo-monitor.service -n 20
 gcloud compute instances delete <vm-name> --project=gcp-engg-vm --zone=us-east1-b
 
 # Rebuild using existing config
-./scripts/build-vm.sh config/users/<name>.yaml
+./src/provisioning/build-vm.sh config/users/<name>.yaml
 ```
 
 ---
@@ -218,7 +220,7 @@ gcloud compute project-info add-metadata \
 
 **Check which test failed:**
 ```bash
-./scripts/verify-security.sh <name> <vm-name> gcp-engg-vm us-east1-b
+./src/security/verify-security.sh <name> <vm-name> gcp-engg-vm us-east1-b
 ```
 
 **Common issues:**

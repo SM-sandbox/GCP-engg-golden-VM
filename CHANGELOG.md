@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.0] - 2025-12-01
+
+### 🖥️ NoMachine Remote Desktop Support
+
+**New Feature:** Added NoMachine as an alternative to Chrome Remote Desktop for engineers who need lower latency and full keyboard shortcut support.
+
+### Added
+
+- **NoMachine Installation Script** (`src/provisioning/install-nomachine.sh`)
+  - Automated NoMachine server installation on existing VMs
+  - Downloads latest version from official NoMachine site
+  - Configures systemd service for auto-start
+
+- **NoMachine Firewall Script** (`src/provisioning/setup-nomachine-firewall.sh`)
+  - Creates GCP firewall rule for NoMachine ports (4000, 4011-4020)
+  - Tags VMs with `nomachine-enabled` for targeted access
+  - Idempotent - safe to run multiple times
+
+- **Engineer Email Template** (`artifacts/NOMACHINE-SETUP-EMAIL.txt`)
+  - Complete setup instructions for engineers
+  - Connection details and troubleshooting guide
+
+### Why NoMachine?
+
+Chrome Remote Desktop works through a browser tab, which causes:
+- Keyboard shortcuts intercepted by Chrome (Ctrl+C, Ctrl+V, etc.)
+- Lag due to webpage-based streaming
+- Less responsive UI for intensive coding work
+
+NoMachine provides:
+- Native application with direct key passthrough
+- Lower latency NX protocol
+- Better performance for development work
+- File transfer support
+
+### Usage
+
+```bash
+# For existing VMs (manual)
+./src/provisioning/install-nomachine.sh <vm-name>
+./src/provisioning/setup-nomachine-firewall.sh <vm-name>
+
+# Engineers then download NoMachine client from:
+# https://www.nomachine.com/download
+```
+
+---
+
 ## [2.0.0] - 2025-12-01
 
 ### 🎯 Major Restructure - Production-Ready Organization
