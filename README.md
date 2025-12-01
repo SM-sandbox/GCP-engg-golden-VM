@@ -32,6 +32,45 @@ cat artifacts/onboarding-emails/<vm-name>-onboarding.txt
 
 ---
 
+## 🖼️ Golden Image Location
+
+### Where is the Golden Image?
+
+The **golden image** is stored in **GCP Compute Engine**, not in this repository:
+
+- **Image Family**: `gcp-engg-golden`
+- **GCP Project**: `gcp-engg-vm`
+- **Location**: GCP Console → Compute Engine → Images
+
+**View via CLI:**
+```bash
+gcloud compute images list --project=gcp-engg-vm --filter="family:gcp-engg-golden"
+```
+
+### What's in This Repository?
+
+This repository contains the **automation scripts** for creating and using the golden image:
+
+- **Creation Script**: `src/golden-image/create-gnome-image.sh`
+  - Builds a VM with GNOME desktop, Chrome, Windsurf, Python, Node.js, and all dev tools
+  - Takes ~45 minutes to install everything
+  - Creates a reusable GCP image from the configured VM
+
+- **Clone Script**: `src/provisioning/clone-vm-from-image.sh`
+  - Instantly creates new VMs from the golden image (~2 minutes vs 45 minutes)
+  - Clones are identical to the base image with all software pre-installed
+
+- **User Configurations**: `config/users/*.yaml`
+  - Reference the golden image via `image_family: gcp-engg-golden`
+  - VMs boot from the golden image instead of installing from scratch
+
+**Golden Image Workflow:**
+1. Build base VM with all software → `create-gnome-image.sh`
+2. Create GCP image from VM → Manual or automated
+3. Clone new VMs instantly → `clone-vm-from-image.sh`
+
+---
+
 ## 📁 Repository Structure
 
 ```
