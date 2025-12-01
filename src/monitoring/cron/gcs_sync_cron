@@ -1,0 +1,3 @@
+# GCS Log Sync - Runs every 10 minutes
+# User: root (needs gcloud credentials)
+*/10 * * * * root DEV_USER=__DEV_USER__ ACTIVITY_LOG_DIR=__ACTIVITY_LOG_DIR__ GIT_LOG_DIR=__GIT_LOG_DIR__ GCS_BUCKET=__GCS_BUCKET__ RETENTION_DAYS=180 /bin/bash __INSTALL_DIR__/sync_dev_logs_to_gcs.sh >> /var/log/dev-activity/gcs-sync.log 2>&1

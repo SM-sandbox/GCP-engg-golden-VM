@@ -1,0 +1,3 @@
+# Local Repository Backup - Runs daily at 2 AM
+# User: root (needs permissions to write to /var/backups)
+0 2 * * * root DEV_USER=__DEV_USER__ PROJECTS_ROOT=__PROJECTS_ROOT__ BACKUPS_DIR=__BACKUPS_DIR__ RETENTION_DAYS=7 /bin/bash __INSTALL_DIR__/dev_local_backup.sh >> /var/log/dev-activity/backup.log 2>&1

@@ -1,0 +1,48 @@
+# Global VM Defaults
+# These are applied to all developer VMs unless overridden in user config
+
+vm_defaults:
+  machine_type: n2-standard-4
+  boot_disk_gb: 100
+  os_image: ubuntu-2204-lts
+  network: default
+  enable_public_ip: true
+  preemptible: false
+  
+firewall:
+  allow_ssh: true
+  ssh_port: 22
+  custom_rules: []
+
+service_account:
+  create_dedicated: false
+  scopes:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.read_write
+
+system_defaults:
+  timezone: UTC
+  locale: en_US.UTF-8
+  swap_size_gb: 4
+
+security:
+  disable_root_login: true
+  require_ssh_keys: true
+  password_authentication: false
+  
+monitoring_defaults:
+  activity_daemon:
+    check_interval_seconds: 60
+    idle_shutdown_minutes: 30
+    idle_threshold_cpu_percent: 5
+    
+  git_stats:
+    schedule: "0 * * * *"  # Hourly
+    
+  backup:
+    schedule: "0 2 * * *"  # 2 AM daily
+    local_retention_days: 7
+    
+  gcs_sync:
+    schedule: "0 3 * * *"  # 3 AM daily
+    retention_days: 30

@@ -1,0 +1,105 @@
+# Languages Catalog
+# Installation instructions and configurations for optional languages
+
+go:
+  name: Go
+  versions:
+    "1.22":
+      url: https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
+      checksum: sha256:f6c8a87aa03b92c4b0bf3d558e28ea03006eb29db78917daec5cfb6ec1046265
+    "1.21":
+      url: https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
+      checksum: sha256:e2bc0b3e4b64111ec117295c088bde5f00eeed1567999ff77bc859d7df70078e
+    "1.20":
+      url: https://go.dev/dl/go1.20.12.linux-amd64.tar.gz
+      checksum: sha256:c5bf934751d31c315c1d0bb5fb02296545fa6d08923566f7a5afec81f2ed27d6
+      
+  install_path: /usr/local/go
+  
+  environment:
+    GOPATH: "{home}/go"
+    GOBIN: "{home}/go/bin"
+    PATH: "$PATH:/usr/local/go/bin:{home}/go/bin"
+    
+  post_install:
+    - "go version"
+    - "go env"
+
+rust:
+  name: Rust
+  install_method: rustup
+  rustup_url: https://sh.rustup.rs
+  
+  toolchains:
+    - stable
+    - nightly
+    - beta
+    
+  default_toolchain: stable
+  
+  components:
+    - rustfmt
+    - clippy
+    - rust-analyzer
+    
+  environment:
+    CARGO_HOME: "{home}/.cargo"
+    RUSTUP_HOME: "{home}/.rustup"
+    PATH: "$PATH:{home}/.cargo/bin"
+    
+  post_install:
+    - "rustc --version"
+    - "cargo --version"
+    - "rustup --version"
+
+python:
+  name: Python
+  system_package: python3
+  
+  venv_locations:
+    - "{home}/envs"
+    
+  common_packages:
+    data_science:
+      - pandas
+      - numpy
+      - matplotlib
+      - seaborn
+      - scipy
+      - scikit-learn
+      
+    jupyter:
+      - jupyterlab
+      - ipykernel
+      - notebook
+      
+    web:
+      - flask
+      - fastapi
+      - uvicorn
+      - requests
+      
+    cloud:
+      - boto3
+      - google-cloud-storage
+      - azure-storage-blob
+      
+    utilities:
+      - black
+      - pylint
+      - pytest
+      - mypy
+
+nodejs:
+  name: Node.js
+  system_package: nodejs
+  
+  global_packages:
+    - typescript
+    - ts-node
+    - eslint
+    - prettier
+    - nodemon
+    
+  version_manager: nvm
+  nvm_url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh

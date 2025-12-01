@@ -1,0 +1,3 @@
+# Git Statistics Collection - Runs hourly
+# User: __DEV_USER__
+0 * * * * __DEV_USER__ DEV_USER=__DEV_USER__ PROJECTS_ROOT=__PROJECTS_ROOT__ GIT_LOG_DIR=__GIT_LOG_DIR__ /usr/bin/python3 __INSTALL_DIR__/dev_git_stats.py >> /var/log/dev-git/cron.log 2>&1

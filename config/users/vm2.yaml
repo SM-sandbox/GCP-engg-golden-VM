@@ -1,0 +1,34 @@
+user:
+  email: vm2.gcp@brightfox.ai
+  username: vm2
+  full_name: VM2 GCP
+
+vm:
+  name: dev-vm2-vm-001
+  project: gcp-engg-vm
+  zone: us-east1-b
+  machine_type: n2-standard-4
+  disk_size_gb: 100
+  image_family: ubuntu-2204-lts
+  image_project: ubuntu-os-cloud
+
+applications:
+  chrome: true
+  windsurf: true
+  jupyter: true
+  python: true
+  node: true
+  git: true
+  utils: true
+  build_tools: true
+  azure_cli: true
+  azure_dev_cli: true
+  gcloud_sdk: true
+  github_cli: true
+
+billing:
+  account: 016B46-D56B18-B9B11D
+
+workflow:
+  version: v2-sudo-first
+  allow_initial_sudo: true

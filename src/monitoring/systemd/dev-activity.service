@@ -1,0 +1,19 @@
+[Unit]
+Description=Developer Activity Monitoring Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Environment="DEV_USER=__DEV_USER__"
+Environment="PROJECTS_ROOT=__PROJECTS_ROOT__"
+Environment="ACTIVITY_LOG_DIR=__ACTIVITY_LOG_DIR__"
+Environment="CHECK_INTERVAL_SECONDS=60"
+Environment="IDLE_SHUTDOWN_MINUTES=30"
+Environment="CPU_IDLE_THRESHOLD=5.0"
+ExecStart=/usr/bin/python3 __INSTALL_DIR__/dev_activity_daemon.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

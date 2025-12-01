@@ -1,0 +1,39 @@
+user:
+  email: akash@brightfox.ai
+  username: akash_brightfox_ai
+  full_name: Akash
+
+vm:
+  name: dev-akash-vm-002
+  project: gcp-engg-vm
+  zone: us-east1-b
+  machine_type: n2-standard-4
+  disk_size_gb: 100
+  image_family: ubuntu-2204-lts
+  image_project: ubuntu-os-cloud
+
+applications:
+  chrome: true
+  windsurf: true
+  jupyter: true
+  python: true
+  node: true
+  git: true
+  utils: true
+  build_tools: true
+  github_cli: true
+  azure_cli: true
+
+# Monitoring Config
+paths:
+  projects_root: /home/akash/projects
+  activity_log_dir: /var/log/dev-activity
+  git_log_dir: /var/log/dev-git
+  backups_dir: /var/backups/dev-repos
+
+gcs_sync:
+  enabled: true
+  bucket: "gcp-engg-vm-data"
+
+billing:
+  account: 016B46-D56B18-B9B11D

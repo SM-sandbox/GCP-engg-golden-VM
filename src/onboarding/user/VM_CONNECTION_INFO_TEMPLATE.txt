@@ -1,0 +1,39 @@
+Your GCP Development VM - Connection Details
+=============================================
+
+VM Name: <YOUR_VM_NAME>
+Zone: <YOUR_ZONE>
+Project ID: <PROJECT_ID>
+Your Username: <YOUR_USERNAME>
+Static IP: <STATIC_IP> (reserved - won't change)
+
+Connection Command:
+-------------------
+gcloud compute ssh <YOUR_USERNAME>@<YOUR_VM_NAME> \
+  --zone=<YOUR_ZONE> \
+  --project=<PROJECT_ID>
+
+First Time Setup:
+-----------------
+1. Install gcloud CLI: https://cloud.google.com/sdk/docs/install
+2. Authenticate: gcloud auth login --no-launch-browser
+3. Set project: gcloud config set project <PROJECT_ID>
+4. Connect: (use command above)
+
+Quick Reference:
+----------------
+- Your home directory: /home/<YOUR_USERNAME>
+- Your projects folder: /home/<YOUR_USERNAME>/projects
+- Python venv: source ~/.venv/default/bin/activate
+- Hourly rate: <HOURLY_RATE>
+- Auto-shutdown: 30 minutes idle
+
+For help: scott@brightfox.ai
+
+Getting Started:
+----------------
+1. Read GETTING_STARTED.md first
+2. Follow instructions for setup
+3. (Optional) Set up Windsurf using WINDSURF_REMOTE_SETUP.md
+
+Your VM is fully configured and ready to use!

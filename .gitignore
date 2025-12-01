@@ -1,0 +1,50 @@
+# Keys and secrets
+.keys/
+*.pub
+*.pem
+*.key
+
+# Runtime artifacts (generated at runtime)
+artifacts/builds/*
+artifacts/onboarding-emails/*
+artifacts/reports/*
+
+# Keep artifact directories but ignore contents
+!artifacts/builds/.gitkeep
+!artifacts/onboarding-emails/.gitkeep
+!artifacts/reports/.gitkeep
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+*.bak
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+.mypy_cache/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.tar.gz
+*.zip
+
+# Config overrides (keep templates only)
+config/users/*_local.yaml
+config/users/*_test.yaml

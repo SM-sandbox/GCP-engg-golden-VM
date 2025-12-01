@@ -1,0 +1,92 @@
+# Developer VM Configuration: <USER_NAME>
+# Project: <PROJECT_ID>
+# Last Updated: <DATE>
+
+vm:
+  project_id: <PROJECT_ID>
+  zone: <ZONE>
+  name: <VM_NAME>
+  machine_type: n2-standard-4
+  boot_disk_gb: 100
+  os_image: ubuntu-2204-lts
+  billing_account: <BILLING_ACCOUNT_ID>  # Google Credits (always use this for dev VMs)
+  static_ip: <STATIC_IP>
+  static_ip_name: <STATIC_IP_NAME>
+
+users:
+  admin:
+    username: <ADMIN_USERNAME>
+    description: "VM administrator with sudo access"
+  developer:
+    username: <USER_USERNAME>
+    email: <USER_EMAIL>
+    description: "Primary developer user (no sudo)"
+
+repositories:
+  - name: <REPO_NAME>
+    url: git@github.com:BrightFoxAI/<REPO_NAME>.git
+    branch: main
+    description: "Primary repository"
+
+languages:
+  python:
+    version: "3.11"
+    venv_name: default
+    packages:
+      - requests
+      - pandas
+      - numpy
+      - pytest
+      - black
+      - flake8
+
+system_packages:
+  - vim
+  - tmux
+  - htop
+  - curl
+  - wget
+  - git
+  - build-essential
+
+gcs:
+  project_id: <PROJECT_ID>
+  buckets:
+    logs: <VM_NAME>-logs
+    backups: <VM_NAME>-backups
+
+gcs_sync:
+  enabled: true
+  bucket: <VM_NAME>-backups
+  retention_days: 180
+  schedule: "0 3 * * *"
+
+monitoring:
+  activity_daemon:
+    enabled: true
+    check_interval_seconds: 60
+    idle_shutdown_minutes: 30
+    log_file: /var/log/dev-activity/<USER_USERNAME>_activity.jsonl
+  
+  git_stats:
+    enabled: true
+    schedule: "0 * * * *"
+    log_dir: /var/log/dev-git
+
+backup:
+  local:
+    enabled: true
+    directory: /var/backups/dev-repos
+    retention_days: 7
+    schedule: "0 2 * * *"
+  
+  gcs:
+    enabled: true
+    bucket: <VM_NAME>-backups
+    retention_days: 180
+
+billing:
+  hourly_rate: 75.00
+  currency: USD
+  payment_cycle: monthly
+  idle_penalty_per_shutdown: 0.5

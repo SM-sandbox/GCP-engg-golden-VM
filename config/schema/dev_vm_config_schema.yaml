@@ -1,0 +1,213 @@
+# JSON Schema for Developer VM Configuration (YAML format)
+# This defines the expected structure for config/users/*.yaml files
+
+$schema: "http://json-schema.org/draft-07/schema#"
+title: Developer VM Configuration
+description: Complete configuration schema for automated GCP developer VM provisioning
+type: object
+
+required:
+  - vm
+  - users
+  - paths
+  - system_packages
+
+properties:
+  
+  vm:
+    type: object
+    required: [project_id, zone, name, machine_type, boot_disk_gb, os_image]
+    properties:
+      project_id:
+        type: string
+        description: GCP project ID
+      zone:
+        type: string
+        pattern: "^[a-z]+-[a-z]+[0-9]+-[a-z]$"
+        description: GCP zone (e.g., us-east1-b)
+      name:
+        type: string
+        pattern: "^[a-z][-a-z0-9]*$"
+        description: VM instance name
+      machine_type:
+        type: string
+        description: GCP machine type (e.g., n2-standard-4)
+      boot_disk_gb:
+        type: integer
+        minimum: 50
+        maximum: 1000
+        description: Boot disk size in GB
+      os_image:
+        type: string
+        description: OS image family or specific image
+
+  users:
+    type: object
+    required: [admin, developer]
+    properties:
+      admin:
+        type: object
+        required: [username]
+        properties:
+          username:
+            type: string
+            pattern: "^[a-z_][a-z0-9_-]*$"
+          description:
+            type: string
+      developer:
+        type: object
+        required: [username]
+        properties:
+          username:
+            type: string
+            pattern: "^[a-z_][a-z0-9_-]*$"
+          email:
+            type: string
+            format: email
+          description:
+            type: string
+
+  paths:
+    type: object
+    required: [projects_root, envs_root, tools_root, bin_root, backups_dir, activity_log_dir, git_log_dir]
+    properties:
+      projects_root:
+        type: string
+        pattern: "^/home/[^/]+/projects$"
+      envs_root:
+        type: string
+        pattern: "^/home/[^/]+/envs$"
+      tools_root:
+        type: string
+        pattern: "^/home/[^/]+/tools$"
+      bin_root:
+        type: string
+        pattern: "^/home/[^/]+/bin$"
+      backups_dir:
+        type: string
+        pattern: "^/var/backups/"
+      activity_log_dir:
+        type: string
+        pattern: "^/var/log/"
+      git_log_dir:
+        type: string
+        pattern: "^/var/log/"
+
+  system_packages:
+    type: object
+    required: [apt, cloud_sdks]
+    properties:
+      apt:
+        type: array
+        items:
+          type: string
+        minItems: 1
+      cloud_sdks:
+        type: array
+        items:
+          type: string
+          enum: [gcloud, gh, az, azd]
+
+  languages:
+    type: object
+    properties:
+      go:
+        type: object
+        properties:
+          enabled:
+            type: boolean
+          version:
+            type: string
+            pattern: "^[0-9]+\\.[0-9]+$"
+      rust:
+        type: object
+        properties:
+          enabled:
+            type: boolean
+
+  developer_setup:
+    type: object
+    properties:
+      create_dirs:
+        type: array
+        items:
+          type: string
+      python_envs:
+        type: array
+        items:
+          type: object
+          required: [name, packages]
+          properties:
+            name:
+              type: string
+            packages:
+              type: array
+              items:
+                type: string
+
+  repos:
+    type: array
+    items:
+      type: string
+      pattern: "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+    description: GitHub repositories in owner/repo format
+
+  backup:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      local_retention_days:
+        type: integer
+        minimum: 1
+        maximum: 90
+      schedule:
+        type: string
+        pattern: "^[0-9*/ -]+$"
+        description: Cron schedule format
+
+  gcs_sync:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      bucket:
+        type: string
+        pattern: "^[a-z0-9][a-z0-9_-]*[a-z0-9]$"
+      schedule:
+        type: string
+        pattern: "^[0-9*/ -]+$"
+      retention_days:
+        type: integer
+        minimum: 1
+
+  monitoring:
+    type: object
+    properties:
+      activity_daemon:
+        type: object
+        properties:
+          enabled:
+            type: boolean
+          check_interval_seconds:
+            type: integer
+            minimum: 30
+            maximum: 600
+          idle_shutdown_minutes:
+            type: integer
+            minimum: 10
+      git_stats:
+        type: object
+        properties:
+          enabled:
+            type: boolean
+          schedule:
+            type: string
+      reports:
+        type: object
+        properties:
+          monthly_summary:
+            type: boolean
+          output_format:
+            type: string
+            enum: [csv, json]

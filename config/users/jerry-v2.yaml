@@ -1,0 +1,30 @@
+user:
+  email: jerry@brightfox.ai
+  username: jerry
+  full_name: Jerry
+  
+vm:
+  name: dev-jerry-vm-v2-001
+  project: gcp-engg-vm
+  zone: us-east1-b
+  machine_type: n2-standard-4
+  disk_size_gb: 100
+  image_family: vm2-base
+  image_project: gcp-engg-vm
+
+billing:
+  account: 016B46-D56B18-B9B11D
+
+workflow: v2-sudo-first
+
+applications:
+  chrome: true
+  windsurf: true
+  jupyter: true
+  python: true
+  node: true
+  git: true
+  utils: true
+  build_tools: true
+  github_cli: true
+  azure_cli: true
