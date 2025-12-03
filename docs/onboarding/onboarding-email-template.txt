@@ -1,0 +1,136 @@
+================================================================================
+DEVELOPER VM ONBOARDING - [NAME]
+================================================================================
+
+Hi [NAME],
+
+Your secure development VM is ready! Here's everything you need to get started.
+
+--------------------------------------------------------------------------------
+YOUR VM DETAILS
+--------------------------------------------------------------------------------
+
+VM Name:        dev-[name]-gnome-nm-001
+Static IP:      [IP_ADDRESS]
+NoMachine Port: 4000
+Username:       [username]
+Password:       bfAI2025vmtest!
+
+--------------------------------------------------------------------------------
+STEP 1: AUTHENTICATE WITH GOOGLE CLOUD (One-time setup)
+--------------------------------------------------------------------------------
+
+1. Open Terminal on your Mac
+
+2. Run this command:
+   gcloud auth login --no-launch-browser
+
+3. Copy the URL it gives you and paste it into your browser
+
+4. Sign in with your Brightfox Google account
+
+5. Copy the authorization code back into Terminal
+
+--------------------------------------------------------------------------------
+STEP 2: START YOUR VM
+--------------------------------------------------------------------------------
+
+Run this command in Terminal:
+
+   gcloud compute instances start dev-[name]-gnome-nm-001 --zone=us-east1-b --project=gcp-engg-vm
+
+Wait about 30 seconds for it to fully boot.
+
+--------------------------------------------------------------------------------
+STEP 3: INSTALL NOMACHINE (One-time setup)
+--------------------------------------------------------------------------------
+
+1. Download NoMachine from: https://downloads.nomachine.com/download/?id=3
+
+2. Install it on your Mac (drag to Applications)
+
+3. Open NoMachine
+
+--------------------------------------------------------------------------------
+STEP 4: CONNECT TO YOUR VM
+--------------------------------------------------------------------------------
+
+1. In NoMachine, click "Add" to create a new connection
+
+2. Enter these details:
+   - Name: My Dev VM (or whatever you like)
+   - Host: [IP_ADDRESS]
+   - Port: 4000
+   - Protocol: NX
+
+3. Click "Connect"
+
+4. When prompted, enter:
+   - Username: [username]
+   - Password: bfAI2025vmtest!
+
+5. You'll see the Ubuntu GNOME desktop!
+
+--------------------------------------------------------------------------------
+STEP 5: CHANGE YOUR PASSWORD (Optional but Recommended)
+--------------------------------------------------------------------------------
+
+Once logged into the desktop:
+
+1. Open Terminal (click Activities, type "Terminal")
+
+2. Run: passwd
+
+3. Enter current password: bfAI2025vmtest!
+
+4. Enter your new password twice
+
+--------------------------------------------------------------------------------
+WHAT'S INSTALLED
+--------------------------------------------------------------------------------
+
+Your VM comes pre-loaded with:
+
+Development Tools:
+- Windsurf IDE (AI-powered code editor)
+- Git
+- Python 3.10 + pip
+- Node.js 20 + npm
+- Build essentials (gcc, make)
+
+Cloud CLIs:
+- Google Cloud CLI (gcloud)
+- Azure CLI (az)
+- Azure Developer CLI (azd)
+- GitHub CLI (gh)
+
+Browsers:
+- Google Chrome
+
+Remote Desktop:
+- NoMachine server
+
+--------------------------------------------------------------------------------
+IMPORTANT NOTES
+--------------------------------------------------------------------------------
+
+1. AUTO-SHUTDOWN: Your VM will automatically shut down after 30 minutes of 
+   inactivity to save costs. Just start it again when you need it.
+
+2. STATIC IP: Your IP address (above) never changes, so your NoMachine 
+   connection settings will always work.
+
+3. YOUR PROJECTS: Save your work in ~/projects - this is your workspace.
+
+4. STOPPING YOUR VM: When done for the day, you can stop it manually:
+   gcloud compute instances stop dev-[name]-gnome-nm-001 --zone=us-east1-b --project=gcp-engg-vm
+
+--------------------------------------------------------------------------------
+NEED HELP?
+--------------------------------------------------------------------------------
+
+If you run into any issues, reach out on Teams and we'll get you sorted.
+
+Welcome to your new dev environment!
+
+================================================================================

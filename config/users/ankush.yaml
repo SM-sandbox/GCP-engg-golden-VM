@@ -1,16 +1,25 @@
-user:
-  email: ankush@brightfox.ai
-  username: ankush
-  full_name: Ankush
-  
+# Ankush's Developer VM Configuration
+# Created: 2025-12-03
+
 vm:
-  name: dev-ankush-vm-001
-  project: gcp-engg-vm
+  name: dev-ankush-gnome-nm-001
+  project_id: gcp-engg-vm
   zone: us-east1-b
   machine_type: n2-standard-4
   disk_size_gb: 100
-  image_family: ubuntu-2204-lts
-  image_project: ubuntu-os-cloud
+  static_ip: 35.231.209.38
+  image_family: gcp-engg-golden-v3
 
-billing:
-  account: 016B46-D56B18-B9B11D
+user:
+  username: ankush
+  default_password: bfAI2025vmtest!
+
+paths:
+  projects: /home/ankush/projects
+  logs: /var/log/dev-activity
+  backups: /home/ankush/backups
+
+gcs_sync:
+  bucket: brightfox-dev-logs
+  prefix: ankush
+  interval_minutes: 5

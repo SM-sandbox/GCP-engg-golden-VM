@@ -1,0 +1,171 @@
+================================================================================
+DEVELOPER VM ONBOARDING - VM2.GCP (Test Account)
+================================================================================
+
+Test account for vm2.gcp@brightfox.ai
+
+--------------------------------------------------------------------------------
+YOUR VM DETAILS
+--------------------------------------------------------------------------------
+
+VM Name:        dev-vm2gcp-gnome-nm-001
+Static IP:      35.196.239.41
+NoMachine Port: 4000
+Username:       vm2gcp
+Password:       bfAI2025vmtest!
+
+--------------------------------------------------------------------------------
+STEP 1: INSTALL GOOGLE CLOUD CLI (One-time setup)
+--------------------------------------------------------------------------------
+
+If you don't have gcloud installed:
+
+1. Download from: https://cloud.google.com/sdk/docs/install
+2. Install and restart Terminal
+
+--------------------------------------------------------------------------------
+STEP 2: AUTHENTICATE WITH GOOGLE CLOUD (One-time setup)
+--------------------------------------------------------------------------------
+
+1. Open Terminal on your Mac
+
+2. Run this command:
+   gcloud auth login --no-launch-browser
+
+3. Copy the URL it gives you and paste it into your browser
+
+4. Sign in with vm2.gcp@brightfox.ai
+
+5. Copy the authorization code back into Terminal
+
+--------------------------------------------------------------------------------
+STEP 3: START YOUR VM
+--------------------------------------------------------------------------------
+
+Your VM shuts down automatically when idle to save costs. Start it with:
+
+   gcloud compute instances start dev-vm2gcp-gnome-nm-001 --zone=us-east1-b --project=gcp-engg-vm
+
+--------------------------------------------------------------------------------
+STEP 4: VERIFY VM IS READY (Important!)
+--------------------------------------------------------------------------------
+
+Before connecting with NoMachine, confirm the VM is fully booted:
+
+   gcloud compute ssh dev-vm2gcp-gnome-nm-001 --zone=us-east1-b --project=gcp-engg-vm --command="echo 'VM is ready!' && systemctl is-active nxserver"
+
+You should see:
+   VM is ready!
+   active
+
+If you see "active", proceed to Step 5. If not, wait 30 seconds and try again.
+
+--------------------------------------------------------------------------------
+STEP 5: INSTALL NOMACHINE (One-time setup)
+--------------------------------------------------------------------------------
+
+1. Download NoMachine from: https://downloads.nomachine.com/download/?id=3
+
+2. Install it on your Mac (drag to Applications)
+
+3. Open NoMachine
+
+--------------------------------------------------------------------------------
+STEP 6: CONNECT TO YOUR VM
+--------------------------------------------------------------------------------
+
+1. In NoMachine, click "Add" to create a new connection
+
+2. Enter these details:
+   - Name: VM2GCP Test VM
+   - Host: 35.196.239.41
+   - Port: 4000
+   - Protocol: NX
+   - Check "Always accept the host verification key"
+
+3. Click "Add", then double-click your new connection
+
+4. When prompted, enter:
+   - Username: vm2gcp
+   - Password: bfAI2025vmtest!
+
+5. If asked to "create a new display", click Yes
+
+6. You'll see the Ubuntu GNOME desktop!
+
+--------------------------------------------------------------------------------
+STEP 7: CHANGE YOUR PASSWORD (Optional but Recommended)
+--------------------------------------------------------------------------------
+
+Once logged into the desktop:
+
+1. Open Terminal (click Activities, type "Terminal")
+
+2. Run: passwd
+
+3. Enter current password: bfAI2025vmtest!
+
+4. Enter your new password twice
+
+--------------------------------------------------------------------------------
+WHAT'S INSTALLED
+--------------------------------------------------------------------------------
+
+Your VM comes pre-loaded with:
+
+Development Tools:
+- Windsurf IDE (AI-powered code editor)
+- Git
+- Python 3.10 + pip
+- Node.js 20 + npm
+- Build essentials (gcc, make)
+
+Cloud CLIs:
+- Google Cloud CLI (gcloud)
+- Azure CLI (az)
+- Azure Developer CLI (azd)
+- GitHub CLI (gh)
+
+Browsers:
+- Google Chrome
+
+Remote Desktop:
+- NoMachine server
+
+--------------------------------------------------------------------------------
+DAILY WORKFLOW
+--------------------------------------------------------------------------------
+
+START YOUR DAY:
+   gcloud compute instances start dev-vm2gcp-gnome-nm-001 --zone=us-east1-b --project=gcp-engg-vm
+
+VERIFY IT'S READY:
+   gcloud compute ssh dev-vm2gcp-gnome-nm-001 --zone=us-east1-b --project=gcp-engg-vm --command="systemctl is-active nxserver"
+
+CONNECT: Open NoMachine and double-click "VM2GCP Test VM"
+
+END YOUR DAY (optional - VM auto-shuts down after 30 min idle):
+   gcloud compute instances stop dev-vm2gcp-gnome-nm-001 --zone=us-east1-b --project=gcp-engg-vm
+
+--------------------------------------------------------------------------------
+IMPORTANT NOTES
+--------------------------------------------------------------------------------
+
+1. AUTO-SHUTDOWN: Your VM automatically shuts down after 30 minutes of 
+   inactivity to save costs. Just start it again when you need it.
+
+2. STATIC IP: Your IP address (35.196.239.41) never changes, so your 
+   NoMachine connection will always work.
+
+3. YOUR PROJECTS: Save your work in ~/projects - this is your workspace.
+
+4. UBUNTU PROMPTS: If you see prompts about Ubuntu Pro or upgrading to 
+   24.04, click "Skip" or "Don't Upgrade". We manage updates centrally.
+
+--------------------------------------------------------------------------------
+NEED HELP?
+--------------------------------------------------------------------------------
+
+This is a test account - no admin rights.
+
+================================================================================

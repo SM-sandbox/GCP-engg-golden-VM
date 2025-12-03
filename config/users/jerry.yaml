@@ -1,22 +1,22 @@
-# Akash's VM Configuration
+# Jerry's VM Configuration
 # Created: 2025-12-02
-# VM: dev-akash-gnome-nm-001
+# VM: dev-jerry-gnome-nm-001
 
 vm:
-  name: dev-akash-gnome-nm-001
+  name: dev-jerry-gnome-nm-001
   project_id: gcp-engg-vm
   zone: us-east1-b
   machine_type: n2-standard-4
   boot_disk_size: 100
-  static_ip: 35.237.179.248
+  static_ip: 104.196.37.111
   image_family: gcp-engg-golden-v2
 
 user:
-  username: akash
-  email: akash@brightfox.ai
+  username: jerry
+  email: jerry@brightfox.ai
 
 paths:
-  projects_root: /home/akash/projects
+  projects_root: /home/jerry/projects
   activity_log_dir: /var/log/dev-activity
   git_log_dir: /var/log/dev-git
   backups_dir: /var/backups/dev

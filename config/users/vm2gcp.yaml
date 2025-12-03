@@ -1,0 +1,28 @@
+# vm2.gcp@brightfox.ai Test Account Configuration
+# Created: 2025-12-03
+# Note: This is Scott's test account without admin rights
+
+vm:
+  name: dev-vm2gcp-gnome-nm-001
+  project_id: gcp-engg-vm
+  zone: us-east1-b
+  machine_type: n2-standard-4
+  disk_size_gb: 100
+  static_ip: 35.196.239.41
+  image_family: gcp-engg-golden-v3
+
+user:
+  username: vm2gcp
+  email: vm2.gcp@brightfox.ai
+  default_password: bfAI2025vmtest!
+  is_test_account: true
+
+paths:
+  projects: /home/vm2gcp/projects
+  logs: /var/log/dev-activity
+  backups: /home/vm2gcp/backups
+
+gcs_sync:
+  bucket: brightfox-dev-logs
+  prefix: vm2gcp
+  interval_minutes: 5

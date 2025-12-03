@@ -48,3 +48,7 @@ Thumbs.db
 # Config overrides (keep templates only)
 config/users/*_local.yaml
 config/users/*_test.yaml
+
+# Archived old configs and scripts
+config/users/_archive/
+src/_archive/
